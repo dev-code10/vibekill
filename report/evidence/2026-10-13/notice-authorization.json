@@ -1,0 +1,347 @@
+{
+  "case": "notice-authorization",
+  "verdict": "reproduced",
+  "checks": [
+    {
+      "name": "notice-author 회원가입",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "notice-author 일반 사용자로 생성",
+      "actual": "user",
+      "expected": "user",
+      "passed": true
+    },
+    {
+      "name": "other-user 회원가입",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "other-user 일반 사용자로 생성",
+      "actual": "user",
+      "expected": "user",
+      "passed": true
+    },
+    {
+      "name": "일반 작성자가 글 작성",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "게시글 번호 발급",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "관리자가 공지 지정",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "공지 지정 후 조회",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "저장된 공지 상태",
+      "actual": "공지",
+      "expected": "공지",
+      "passed": true
+    },
+    {
+      "name": "원 작성자 유지",
+      "actual": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "다른 사용자의 수정 거부",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "원 작성자의 공지 유지 수정 거부",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "거부 후 조회",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "거부된 요청으로 본문이 변하지 않음",
+      "actual": "관리자가 공지로 지정하기 전의 본문입니다.",
+      "expected": "관리자가 공지로 지정하기 전의 본문입니다.",
+      "passed": true
+    },
+    {
+      "name": "거부된 요청으로 공지 상태가 변하지 않음",
+      "actual": "공지",
+      "expected": "공지",
+      "passed": true
+    },
+    {
+      "name": "원 작성자가 자유로 바꾸며 수정",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "수정 후 조회",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "실제 카테고리 변경",
+      "actual": "자유",
+      "expected": "자유",
+      "passed": true
+    },
+    {
+      "name": "실제 제목 변경",
+      "actual": "작성자가 변경한 제목",
+      "expected": "작성자가 변경한 제목",
+      "passed": true
+    },
+    {
+      "name": "실제 본문 변경",
+      "actual": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+      "expected": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+      "passed": true
+    },
+    {
+      "name": "작성자는 여전히 일반 사용자",
+      "actual": "user",
+      "expected": "user",
+      "passed": true
+    }
+  ],
+  "notes": {},
+  "requests": [
+    {
+      "actor": "notice-author",
+      "method": "POST",
+      "path": "/api/auth/register",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-notice-author@example.invalid",
+        "password": "[redacted]",
+        "displayName": "검증 notice-author"
+      },
+      "status": 201,
+      "responseBody": {
+        "user": {
+          "id": 4,
+          "email": "run-mv6bpyrg-f5beb7-notice-author@example.invalid",
+          "displayName": "검증 notice-author",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "other-user",
+      "method": "POST",
+      "path": "/api/auth/register",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-other-user@example.invalid",
+        "password": "[redacted]",
+        "displayName": "검증 other-user"
+      },
+      "status": 201,
+      "responseBody": {
+        "user": {
+          "id": 5,
+          "email": "run-mv6bpyrg-f5beb7-other-user@example.invalid",
+          "displayName": "검증 other-user",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:34.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "POST",
+      "path": "/api/posts",
+      "cookieSent": true,
+      "requestBody": {
+        "title": "공지 권한 검증용 게시글",
+        "content": "관리자가 공지로 지정하기 전의 본문입니다.",
+        "category": "자유"
+      },
+      "status": 201,
+      "responseBody": {
+        "id": 1,
+        "message": "게시글을 등록했습니다."
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "admin",
+      "method": "PATCH",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": {
+        "title": "공지 권한 검증용 게시글",
+        "content": "관리자가 공지로 지정하기 전의 본문입니다.",
+        "category": "공지"
+      },
+      "status": 200,
+      "responseBody": {
+        "ok": true
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "GET",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "post": {
+          "id": 1,
+          "title": "공지 권한 검증용 게시글",
+          "content": "관리자가 공지로 지정하기 전의 본문입니다.",
+          "category": "공지",
+          "viewCount": 0,
+          "createdAt": "2026-10-13T06:52:34.000Z",
+          "updatedAt": "2026-10-13T06:52:34.000Z",
+          "author": {
+            "id": 4,
+            "displayName": "검증 notice-author",
+            "avatarUrl": "",
+            "role": "user"
+          }
+        },
+        "comments": []
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "other-user",
+      "method": "PATCH",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": {
+        "title": "작성자가 변경한 제목",
+        "content": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+        "category": "자유"
+      },
+      "status": 403,
+      "responseBody": {
+        "error": "수정 권한이 없습니다."
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "PATCH",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": {
+        "title": "작성자가 변경한 제목",
+        "content": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+        "category": "공지"
+      },
+      "status": 403,
+      "responseBody": {
+        "error": "공지 게시글은 관리자만 작성할 수 있습니다."
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "GET",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "post": {
+          "id": 1,
+          "title": "공지 권한 검증용 게시글",
+          "content": "관리자가 공지로 지정하기 전의 본문입니다.",
+          "category": "공지",
+          "viewCount": 0,
+          "createdAt": "2026-10-13T06:52:34.000Z",
+          "updatedAt": "2026-10-13T06:52:34.000Z",
+          "author": {
+            "id": 4,
+            "displayName": "검증 notice-author",
+            "avatarUrl": "",
+            "role": "user"
+          }
+        },
+        "comments": []
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "PATCH",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": {
+        "title": "작성자가 변경한 제목",
+        "content": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+        "category": "자유"
+      },
+      "status": 200,
+      "responseBody": {
+        "ok": true
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "notice-author",
+      "method": "GET",
+      "path": "/api/posts/1",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "post": {
+          "id": 1,
+          "title": "작성자가 변경한 제목",
+          "content": "일반 작성자의 요청으로 본문이 변경되었습니다.",
+          "category": "자유",
+          "viewCount": 0,
+          "createdAt": "2026-10-13T06:52:34.000Z",
+          "updatedAt": "2026-10-13T06:52:34.000Z",
+          "author": {
+            "id": 4,
+            "displayName": "검증 notice-author",
+            "avatarUrl": "",
+            "role": "user"
+          }
+        },
+        "comments": []
+      },
+      "sessionCookieSet": true
+    }
+  ]
+}

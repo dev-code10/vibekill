@@ -1,0 +1,86 @@
+검증 시각: 2026-10-13 15:52:26 +09:00
+Node.js v22.19.0 / MySQL 8.0.45
+앱 소스 변경 없음: true
+
+[setup] ready
+admin: POST /api/auth/login -> 200
+OK 관리자 로그인: 200
+OK 관리자 역할 확인: "admin"
+
+[password-truncation] reproduced
+password-owner: POST /api/auth/register -> 201
+original-password: POST /api/auth/login -> 200
+different-prefix: POST /api/auth/login -> 401
+alternate-password: POST /api/auth/login -> 200
+alternate-password: GET /api/me -> 200
+OK 두 비밀번호가 다름: true
+OK password-owner 회원가입: 201
+OK password-owner 일반 사용자로 생성: "user"
+OK 가입 비밀번호 로그인: 200
+OK 첫 72바이트가 다른 비밀번호 거부: 401
+OK 72바이트 뒤만 다른 비밀번호 로그인: 200
+OK 같은 계정으로 로그인됨: 2
+OK 발급 세션으로 인증됨: 200
+OK 인증된 사용자 일치: 2
+
+[session-reactivation] reproduced
+session-A: POST /api/auth/register -> 201
+session-B: POST /api/auth/login -> 200
+session-A: GET /api/me -> 200
+session-B: GET /api/me -> 200
+admin: PATCH /api/admin/users/3/status -> 200
+session-A: GET /api/me -> 401
+suspended-login: POST /api/auth/login -> 401
+admin: PATCH /api/admin/users/3/status -> 200
+session-A: GET /api/me -> 401
+session-B: GET /api/me -> 200
+OK session-A 회원가입: 201
+OK session-A 일반 사용자로 생성: "user"
+OK 세션 B 로그인: 200
+OK 서로 다른 세션 두 개 발급: true
+OK session-A 정지 전 인증: 200
+OK session-A 사용자 일치: 3
+OK session-B 정지 전 인증: 200
+OK session-B 사용자 일치: 3
+OK 관리자 계정 정지: 200
+OK 정지 중 세션 A 거부: 401
+OK 정지 중 새 로그인 거부: 401
+OK 관리자 정지 해제: 200
+OK 정지 중 사용한 A는 해제 후에도 거부: 401
+OK 정지 중 미사용한 B는 해제 후 인증됨: 200
+OK 세션 B 사용자 일치: 3
+
+[notice-authorization] reproduced
+notice-author: POST /api/auth/register -> 201
+other-user: POST /api/auth/register -> 201
+notice-author: POST /api/posts -> 201
+admin: PATCH /api/posts/1 -> 200
+notice-author: GET /api/posts/1 -> 200
+other-user: PATCH /api/posts/1 -> 403
+notice-author: PATCH /api/posts/1 -> 403
+notice-author: GET /api/posts/1 -> 200
+notice-author: PATCH /api/posts/1 -> 200
+notice-author: GET /api/posts/1 -> 200
+OK notice-author 회원가입: 201
+OK notice-author 일반 사용자로 생성: "user"
+OK other-user 회원가입: 201
+OK other-user 일반 사용자로 생성: "user"
+OK 일반 작성자가 글 작성: 201
+OK 게시글 번호 발급: true
+OK 관리자가 공지 지정: 200
+OK 공지 지정 후 조회: 200
+OK 저장된 공지 상태: "공지"
+OK 원 작성자 유지: 4
+OK 다른 사용자의 수정 거부: 403
+OK 원 작성자의 공지 유지 수정 거부: 403
+OK 거부 후 조회: 200
+OK 거부된 요청으로 본문이 변하지 않음: "관리자가 공지로 지정하기 전의 본문입니다."
+OK 거부된 요청으로 공지 상태가 변하지 않음: "공지"
+OK 원 작성자가 자유로 바꾸며 수정: 200
+OK 수정 후 조회: 200
+OK 실제 카테고리 변경: "자유"
+OK 실제 제목 변경: "작성자가 변경한 제목"
+OK 실제 본문 변경: "일반 작성자의 요청으로 본문이 변경되었습니다."
+OK 작성자는 여전히 일반 사용자: "user"
+
+정리 결과: {"appStopped":true,"mysqlStopped":true,"temporaryDirectoryRemoved":true}

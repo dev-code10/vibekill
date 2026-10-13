@@ -1,0 +1,283 @@
+{
+  "case": "session-reactivation",
+  "verdict": "reproduced",
+  "checks": [
+    {
+      "name": "session-A 회원가입",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "session-A 일반 사용자로 생성",
+      "actual": "user",
+      "expected": "user",
+      "passed": true
+    },
+    {
+      "name": "세션 B 로그인",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "서로 다른 세션 두 개 발급",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "session-A 정지 전 인증",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "session-A 사용자 일치",
+      "actual": 3,
+      "expected": 3,
+      "passed": true
+    },
+    {
+      "name": "session-B 정지 전 인증",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "session-B 사용자 일치",
+      "actual": 3,
+      "expected": 3,
+      "passed": true
+    },
+    {
+      "name": "관리자 계정 정지",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "정지 중 세션 A 거부",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "정지 중 새 로그인 거부",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "관리자 정지 해제",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "정지 중 사용한 A는 해제 후에도 거부",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "정지 중 미사용한 B는 해제 후 인증됨",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "세션 B 사용자 일치",
+      "actual": 3,
+      "expected": 3,
+      "passed": true
+    }
+  ],
+  "notes": {
+    "replay": {
+      "newLoginAfterReactivation": false,
+      "usedOriginalCookieB": true
+    }
+  },
+  "requests": [
+    {
+      "actor": "session-A",
+      "method": "POST",
+      "path": "/api/auth/register",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-session-A@example.invalid",
+        "password": "[redacted]",
+        "displayName": "검증 session-A"
+      },
+      "status": 201,
+      "responseBody": {
+        "user": {
+          "id": 3,
+          "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+          "displayName": "검증 session-A",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "session-B",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+        "password": "[redacted]"
+      },
+      "status": 200,
+      "responseBody": {
+        "user": {
+          "id": 3,
+          "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+          "displayName": "검증 session-A",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "session-A",
+      "method": "GET",
+      "path": "/api/me",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "user": {
+          "id": 3,
+          "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+          "displayName": "검증 session-A",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "session-B",
+      "method": "GET",
+      "path": "/api/me",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "user": {
+          "id": 3,
+          "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+          "displayName": "검증 session-A",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "admin",
+      "method": "PATCH",
+      "path": "/api/admin/users/3/status",
+      "cookieSent": true,
+      "requestBody": {
+        "isActive": false
+      },
+      "status": 200,
+      "responseBody": {
+        "ok": true
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "session-A",
+      "method": "GET",
+      "path": "/api/me",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 401,
+      "responseBody": {
+        "error": "계정이 비활성화되었거나 로그인이 만료되었습니다."
+      },
+      "sessionCookieSet": false
+    },
+    {
+      "actor": "suspended-login",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+        "password": "[redacted]"
+      },
+      "status": 401,
+      "responseBody": {
+        "error": "이메일 또는 비밀번호를 확인해 주세요."
+      },
+      "sessionCookieSet": false
+    },
+    {
+      "actor": "admin",
+      "method": "PATCH",
+      "path": "/api/admin/users/3/status",
+      "cookieSent": true,
+      "requestBody": {
+        "isActive": true
+      },
+      "status": 200,
+      "responseBody": {
+        "ok": true
+      },
+      "sessionCookieSet": true
+    },
+    {
+      "actor": "session-A",
+      "method": "GET",
+      "path": "/api/me",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 401,
+      "responseBody": {
+        "error": "로그인이 필요합니다."
+      },
+      "sessionCookieSet": false
+    },
+    {
+      "actor": "session-B",
+      "method": "GET",
+      "path": "/api/me",
+      "cookieSent": true,
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {
+        "user": {
+          "id": 3,
+          "email": "run-mv6bpyrg-f5beb7-session-a@example.invalid",
+          "displayName": "검증 session-A",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "user",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:33.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    }
+  ]
+}

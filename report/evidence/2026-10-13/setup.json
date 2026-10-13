@@ -1,0 +1,45 @@
+{
+  "case": "setup",
+  "verdict": "ready",
+  "checks": [
+    {
+      "name": "관리자 로그인",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "관리자 역할 확인",
+      "actual": "admin",
+      "expected": "admin",
+      "passed": true
+    }
+  ],
+  "notes": {},
+  "requests": [
+    {
+      "actor": "admin",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "cookieSent": false,
+      "requestBody": {
+        "email": "run-mv6bpyrg-f5beb7-admin@example.invalid",
+        "password": "[redacted]"
+      },
+      "status": 200,
+      "responseBody": {
+        "user": {
+          "id": 1,
+          "email": "run-mv6bpyrg-f5beb7-admin@example.invalid",
+          "displayName": "검증 관리자",
+          "bio": "",
+          "avatarUrl": "",
+          "role": "admin",
+          "isActive": true,
+          "createdAt": "2026-10-13T06:52:31.000Z"
+        }
+      },
+      "sessionCookieSet": true
+    }
+  ]
+}

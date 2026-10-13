@@ -1,0 +1,98 @@
+{
+  "repository": "https://github.com/dev-code10/vibekill",
+  "commit": "9fda842dda38a933034159e539ea7544c67615ac",
+  "comparedAt": "2026-10-13T07:01:18.906Z",
+  "comparison": "Git commit blob versus original local application; normalized comparison replaces CRLF with LF",
+  "files": [
+    {
+      "file": "Dockerfile",
+      "localSha256": "2baab980eddbed5fb0370ee12d3742e61049b669c56662f0d5bf77797df5dfea",
+      "gitBlobSha256": "2baab980eddbed5fb0370ee12d3742e61049b669c56662f0d5bf77797df5dfea",
+      "normalizedLocalSha256": "2baab980eddbed5fb0370ee12d3742e61049b669c56662f0d5bf77797df5dfea",
+      "normalizedGitSha256": "2baab980eddbed5fb0370ee12d3742e61049b669c56662f0d5bf77797df5dfea",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "README.md",
+      "localSha256": "8278a5285a808770d47c9d30e263f8e0815c8ac97055cc973e4cf714faff7340",
+      "gitBlobSha256": "8278a5285a808770d47c9d30e263f8e0815c8ac97055cc973e4cf714faff7340",
+      "normalizedLocalSha256": "8278a5285a808770d47c9d30e263f8e0815c8ac97055cc973e4cf714faff7340",
+      "normalizedGitSha256": "8278a5285a808770d47c9d30e263f8e0815c8ac97055cc973e4cf714faff7340",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "docker-compose.yml",
+      "localSha256": "b52dee18cb7fee6fff46e5fe7f04c8ba40435e36df3e0809e4124b5500d1be82",
+      "gitBlobSha256": "b52dee18cb7fee6fff46e5fe7f04c8ba40435e36df3e0809e4124b5500d1be82",
+      "normalizedLocalSha256": "b52dee18cb7fee6fff46e5fe7f04c8ba40435e36df3e0809e4124b5500d1be82",
+      "normalizedGitSha256": "b52dee18cb7fee6fff46e5fe7f04c8ba40435e36df3e0809e4124b5500d1be82",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "package.json",
+      "localSha256": "932dbe1e22fb9a0fe193e5564c68c863e2c67a13f61ff08a48b9f89679ae984e",
+      "gitBlobSha256": "932dbe1e22fb9a0fe193e5564c68c863e2c67a13f61ff08a48b9f89679ae984e",
+      "normalizedLocalSha256": "932dbe1e22fb9a0fe193e5564c68c863e2c67a13f61ff08a48b9f89679ae984e",
+      "normalizedGitSha256": "932dbe1e22fb9a0fe193e5564c68c863e2c67a13f61ff08a48b9f89679ae984e",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "public/app.js",
+      "localSha256": "76fd09d6869529dc6ca0821d484b5d975457e7819be64eb0f8fdeaba202886b5",
+      "gitBlobSha256": "76fd09d6869529dc6ca0821d484b5d975457e7819be64eb0f8fdeaba202886b5",
+      "normalizedLocalSha256": "76fd09d6869529dc6ca0821d484b5d975457e7819be64eb0f8fdeaba202886b5",
+      "normalizedGitSha256": "76fd09d6869529dc6ca0821d484b5d975457e7819be64eb0f8fdeaba202886b5",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "public/index.html",
+      "localSha256": "12b6c47cf6b0c244b26214e0119852cbf6505924bd019e001dccc877e1586927",
+      "gitBlobSha256": "12b6c47cf6b0c244b26214e0119852cbf6505924bd019e001dccc877e1586927",
+      "normalizedLocalSha256": "12b6c47cf6b0c244b26214e0119852cbf6505924bd019e001dccc877e1586927",
+      "normalizedGitSha256": "12b6c47cf6b0c244b26214e0119852cbf6505924bd019e001dccc877e1586927",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "public/style.css",
+      "localSha256": "9020b5c5a789e7e35c1320e20e077df90d52193a26ab862128520dac247490c4",
+      "gitBlobSha256": "9020b5c5a789e7e35c1320e20e077df90d52193a26ab862128520dac247490c4",
+      "normalizedLocalSha256": "9020b5c5a789e7e35c1320e20e077df90d52193a26ab862128520dac247490c4",
+      "normalizedGitSha256": "9020b5c5a789e7e35c1320e20e077df90d52193a26ab862128520dac247490c4",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "scripts/create-admin.js",
+      "localSha256": "6b02ecfa27efc93c050828414751b8a8a0a3cb50c417e4f29f691dbb6618a3a0",
+      "gitBlobSha256": "6b02ecfa27efc93c050828414751b8a8a0a3cb50c417e4f29f691dbb6618a3a0",
+      "normalizedLocalSha256": "6b02ecfa27efc93c050828414751b8a8a0a3cb50c417e4f29f691dbb6618a3a0",
+      "normalizedGitSha256": "6b02ecfa27efc93c050828414751b8a8a0a3cb50c417e4f29f691dbb6618a3a0",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "server.js",
+      "localSha256": "49be3d20be15f7aa681161f26eb83b71850a3c70fed2bcfc77a35619d4b43679",
+      "gitBlobSha256": "49be3d20be15f7aa681161f26eb83b71850a3c70fed2bcfc77a35619d4b43679",
+      "normalizedLocalSha256": "49be3d20be15f7aa681161f26eb83b71850a3c70fed2bcfc77a35619d4b43679",
+      "normalizedGitSha256": "49be3d20be15f7aa681161f26eb83b71850a3c70fed2bcfc77a35619d4b43679",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    },
+    {
+      "file": "sql/schema.sql",
+      "localSha256": "90a4ea1ecfd42c8ab3a11c25a27a5ecd1b7fb5dfa5e00d3daeb28cca2e31fa43",
+      "gitBlobSha256": "90a4ea1ecfd42c8ab3a11c25a27a5ecd1b7fb5dfa5e00d3daeb28cca2e31fa43",
+      "normalizedLocalSha256": "90a4ea1ecfd42c8ab3a11c25a27a5ecd1b7fb5dfa5e00d3daeb28cca2e31fa43",
+      "normalizedGitSha256": "90a4ea1ecfd42c8ab3a11c25a27a5ecd1b7fb5dfa5e00d3daeb28cca2e31fa43",
+      "equalIgnoringLineEndings": true,
+      "testedCopyMatchesLocal": true
+    }
+  ]
+}
